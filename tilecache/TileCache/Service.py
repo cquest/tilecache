@@ -34,7 +34,9 @@ class Request (object):
         try:
             return self.service.layers[layername]
         except:
-            raise TileCacheException("The requested layer (%s) does not exist. Available layers are: \n * %s" % (layername, "\n * ".join(self.service.layers.keys()))) 
+            layer_names = self.service.layers.keys()
+            layer_names.sort()
+            raise TileCacheException("The requested layer (%s) does not exist. Available layers are: \n * %s" % (layername, "\n * ".join(layer_names))) 
 
 def import_module(name):
     """Helper module to import any module based on a name, and return the module."""
